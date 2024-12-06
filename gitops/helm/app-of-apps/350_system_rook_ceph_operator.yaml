@@ -14,7 +14,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-bootstrap
   source:
-    path: helm/system/rook-ceph-operator
+    path: gitops/helm/system/rook-ceph-operator
     repoURL: https://github.com/Ujstor/k3s-multi-node-iac.git
     targetRevision: master
     helm:

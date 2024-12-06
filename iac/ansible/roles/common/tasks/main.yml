@@ -1,11 +1,11 @@
 ---
-- name: Update package lists
-  ansible.builtin.apt:
-    update_cache: true
-
-- name: Upgrade all packages
-  ansible.builtin.apt:
-    upgrade: true
+# - name: Update package lists
+#   ansible.builtin.apt:
+#     update_cache: true
+#
+# - name: Upgrade all packages
+#   ansible.builtin.apt:
+#     upgrade: true
 
 - name: Install public AuthorizedKeysFile
   ansible.posix.authorized_key:

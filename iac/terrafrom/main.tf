@@ -8,6 +8,8 @@ module "ssh_key_k3s0" {
 module "k3s0_server" {
   source = "github.com/Ujstor/terraform-hetzner-modules//modules/server?ref=v0.0.6"
 
+  hcloud_ssh_key_id = [module.ssh_key_k3s0.hcloud_ssh_key_id]
+
   server_config = {
     c1 = {
       location     = "nbg1"
@@ -15,7 +17,11 @@ module "k3s0_server" {
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-1.subnet_id
       subnet_ip    = "10.0.1.1"
-      firewall_ids = [module.firewall.firewall_ids.ssh.id, module.firewall.firewall_ids.https.id, module.firewall.firewall_ids.kubeapi.id]
+      firewall_ids = [
+        module.firewall.firewall_ids.ssh.id,
+        module.firewall.firewall_ids.https.id,
+        module.firewall.firewall_ids.kubeapi.id
+      ]
     }
     c2 = {
       location     = "nbg1"
@@ -23,7 +29,11 @@ module "k3s0_server" {
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-1.subnet_id
       subnet_ip    = "10.0.1.2"
-      firewall_ids = [module.firewall.firewall_ids.ssh.id, module.firewall.firewall_ids.https.id, module.firewall.firewall_ids.kubeapi.id]
+      firewall_ids = [
+        module.firewall.firewall_ids.ssh.id,
+        module.firewall.firewall_ids.https.id,
+        module.firewall.firewall_ids.kubeapi.id
+      ]
     }
     c3 = {
       location     = "nbg1"
@@ -31,7 +41,11 @@ module "k3s0_server" {
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-1.subnet_id
       subnet_ip    = "10.0.1.3"
-      firewall_ids = [module.firewall.firewall_ids.ssh.id, module.firewall.firewall_ids.https.id, module.firewall.firewall_ids.kubeapi.id]
+      firewall_ids = [
+        module.firewall.firewall_ids.ssh.id,
+        module.firewall.firewall_ids.https.id,
+        module.firewall.firewall_ids.kubeapi.id
+      ]
     }
     n1 = {
       location     = "nbg1"
@@ -39,7 +53,11 @@ module "k3s0_server" {
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.1"
-      firewall_ids = [module.firewall.firewall_ids.ssh.id, module.firewall.firewall_ids.https.id, module.firewall.firewall_ids.kubeapi.id]
+      firewall_ids = [
+        module.firewall.firewall_ids.ssh.id,
+        module.firewall.firewall_ids.https.id,
+        module.firewall.firewall_ids.kubeapi.id
+      ]
     }
     n2 = {
       location     = "nbg1"
@@ -47,7 +65,11 @@ module "k3s0_server" {
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.2"
-      firewall_ids = [module.firewall.firewall_ids.ssh.id, module.firewall.firewall_ids.https.id, module.firewall.firewall_ids.kubeapi.id]
+      firewall_ids = [
+        module.firewall.firewall_ids.ssh.id,
+        module.firewall.firewall_ids.https.id,
+        module.firewall.firewall_ids.kubeapi.id
+      ]
     }
     n3 = {
       location     = "nbg1"
@@ -55,13 +77,20 @@ module "k3s0_server" {
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.3"
-      firewall_ids = [module.firewall.firewall_ids.ssh.id, module.firewall.firewall_ids.https.id, module.firewall.firewall_ids.kubeapi.id]
+      firewall_ids = [
+        module.firewall.firewall_ids.ssh.id,
+        module.firewall.firewall_ids.https.id,
+        module.firewall.firewall_ids.kubeapi.id
+      ]
     }
   }
 
-  hcloud_ssh_key_id = [module.ssh_key_k3s0.hcloud_ssh_key_id]
-
-  depends_on = [module.ssh_key_k3s0]
+  use_network = true
+  depends_on = [
+    module.ssh_key_k3s0,
+    module.network_config,
+    module.firewall
+  ]
 }
 
 module "network_config" {
