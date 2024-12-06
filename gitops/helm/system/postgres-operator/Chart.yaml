@@ -9,3 +9,4 @@ dependencies:
 - name: postgres-operator
   version: 1.0.0
   repository: "https://ujstor.github.io/helm-charts-system"
+  alias: operator

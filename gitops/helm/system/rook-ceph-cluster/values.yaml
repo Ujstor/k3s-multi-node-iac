@@ -34,14 +34,14 @@ cluster:
         limits:
           memory: "2Gi"
         requests:
-          cpu: "1000m"
+          cpu: "750m"
           memory: "1Gi"
       osd:
         limits:
           memory: "4Gi"
         requests:
-          cpu: "1000m"
-          memory: "4Gi"
+          cpu: "750m"
+          memory: "2Gi"
     dashboard:
       enabled: true
       ssl: true
@@ -74,8 +74,8 @@ cluster:
             limits:
               memory: "4Gi"
             requests:
-              cpu: "1000m"
-              memory: "4Gi"
+              cpu: "750m"
+              memory: "2Gi"
       storageClass:
         enabled: true
         isDefault: false
