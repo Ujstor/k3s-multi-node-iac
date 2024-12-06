@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-notes-flask
+  namespace: gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "12"
+spec:
+  destination:
+    namespace: notes-flask
+    server: https://kubernetes.default.svc
+  project: cluster-bootstrap
+  source:
+    path: helm/apps/notes-flask
+    repoURL: https://github.com/Ujstor/k3s-multi-node-iac.git
+    targetRevision: master
+    helm:
+      version: v3
+      releaseName: notes-flask
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,58 @@
+---
+- name: Server prep
+  hosts: k3s_cluster[0]
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Generate random token
+      ansible.builtin.shell: |
+        set -o pipefail
+        openssl rand -base64 64 | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1
+      args:
+        executable: /bin/bash
+      register: k3s_token_generated
+      changed_when: false
+      no_log: true
+    - name: Set token fact
+      ansible.builtin.set_fact:
+        token: "{{ k3s_token_generated.stdout }}"
+      no_log: true
+
+- name: Server prep
+  hosts: k3s_cluster
+  gather_facts: true
+  become: true
+  roles:
+    - role: common
+    - role: k3s.orchestration.prereq
+
+- name: Setup K3S server
+  hosts: server
+  become: true
+  roles:
+    - role: k3s.orchestration.k3s_server
+
+- name: Setup K3S agent
+  hosts: agent
+  become: true
+  roles:
+    - role: k3s.orchestration.k3s_agent
+
+- name: Get kubeconfig
+  hosts: server[0]
+  become: true
+  vars:
+    kubeconfig_path: /root/.kube/config
+    local_kubeconfig_path: ./kubeconfig
+  tasks:
+    - name: Fetch kubeconfig file from remote server
+      ansible.builtin.fetch:
+        src: "{{ kubeconfig_path }}"
+        dest: "{{ local_kubeconfig_path }}"
+        flat: true
+    - name: Replace server IP in kubeconfig
+      ansible.builtin.replace:
+        path: "{{ local_kubeconfig_path }}"
+        regexp: 'server: https://[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:6443'
+        replace: "server: https://{{ api_endpoint }}:6443"
+      delegate_to: localhost

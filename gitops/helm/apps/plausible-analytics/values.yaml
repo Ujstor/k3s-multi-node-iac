@@ -1,0 +1,16 @@
+plausible:
+  plausible-analytics:
+    baseURL: https://plausible-analytics.k3s0.ujstor.com
+    disableRegistration: false
+
+  customIngress:
+    enabled: true
+    hosts:
+      - host: plausible-analytics.k3s0.ujstor.com
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: plausible-analytics-tls
+        hosts:
+          - plausible-analytics.k3s0.ujstor.com

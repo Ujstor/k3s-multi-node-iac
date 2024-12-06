@@ -1,0 +1,11 @@
+apiVersion: v2
+name: streamlit-wh
+description: Ujstor's streamlit-wh Helm chart for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.0.1"
+
+dependencies:
+- name: streamlit-wh
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-github-apps"

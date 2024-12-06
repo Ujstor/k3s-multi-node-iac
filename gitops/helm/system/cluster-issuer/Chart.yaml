@@ -1,0 +1,12 @@
+apiVersion: v2
+name: cluster-issuer
+description: A ClusterIssuer Helm chart config by Ujstor
+type: application
+version: 1.0.0
+appVersion: "0.0.1"
+
+dependencies:
+- name: cluster-issuer
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-system"
+  alias: cluster-issuer-k3s

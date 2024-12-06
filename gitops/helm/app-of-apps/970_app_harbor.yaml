@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-harbor
+  namespace: gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "16"
+    argocd.argoproj.io/hook-dependency: system-rook-ceph-cluster
+spec:
+  destination:
+    namespace: harbor
+    server: https://kubernetes.default.svc
+  project: cluster-bootstrap
+  source:
+    path: helm/apps/harbor
+    repoURL: https://github.com/Ujstor/k3s-multi-node-iac.git
+    targetRevision: master
+    helm:
+      version: v3
+      releaseName: harbor
+  ignoreDifferences:
+  - group: cilium.io
+    kind: CiliumIdentity
+    jsonPointers:
+    - /metadata/managedFields
+    - /metadata/resourceVersion
+    - /metadata/uid
+    - /metadata/generation
+    - /security-labels
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

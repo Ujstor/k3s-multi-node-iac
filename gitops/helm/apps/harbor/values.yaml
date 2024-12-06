@@ -1,0 +1,7 @@
+harbor-k3s:
+  harbor:
+    expose:
+      ingress:
+        hosts:
+          core: harbor.k3s0.ujstor.com
+    externalURL: https://harbor.k3s0.ujstor.com

@@ -1,0 +1,6 @@
+dependencies:
+- name: rook-ceph-operator
+  repository: https://ujstor.github.io/helm-charts-system
+  version: 1.0.0
+digest: sha256:120a881dfab6442c5d449855c88af4501775f362bda516b1a41a1ac2faf32de9
+generated: "2024-12-06T21:35:37.037306838+01:00"

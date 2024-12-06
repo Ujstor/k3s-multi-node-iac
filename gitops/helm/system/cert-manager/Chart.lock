@@ -1,0 +1,6 @@
+dependencies:
+- name: cert-manager
+  repository: https://ujstor.github.io/helm-charts-system
+  version: 1.0.0
+digest: sha256:0de645ba887528a5125e8b3e985adb2d97f813f2965b0dc65cf2e28adeb99b8a
+generated: "2024-11-15T18:51:55.975153523+01:00"

@@ -1,0 +1,10 @@
+skip_list:
+  - yaml[trailing-spaces]
+  - yaml[indentation]
+  - yaml[new-line-at-end-of-file]
+  - yaml[brackets]
+  - yaml[comments]
+  - var-naming[no-role-prefix]
+  - yaml[line-length]
+  - yaml[empty-lines]
+

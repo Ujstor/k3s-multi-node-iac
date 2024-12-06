@@ -1,0 +1,11 @@
+apiVersion: v2
+name: external-secrets
+description: External-Secrets Helm chart configured by Ujstor
+type: application
+version: 1.0.0
+appVersion: "v0.10.5"
+
+dependencies:
+- name: external-secrets
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-system"

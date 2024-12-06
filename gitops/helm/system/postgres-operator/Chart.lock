@@ -1,0 +1,6 @@
+dependencies:
+- name: postgres-operator
+  repository: https://ujstor.github.io/helm-charts-system
+  version: 1.0.0
+digest: sha256:9ab5e0936175eff640576073cbb2b29b78548a11cd7a462d8e941fea2719d95a
+generated: "2024-11-19T23:27:57.248553272+01:00"

@@ -1,0 +1,12 @@
+apiVersion: v2
+name: harbor
+description: Harbor Helm chart configured by Ujstor
+type: application
+version: 1.0.0
+appVersion: "2.12.0"
+
+dependencies:
+- name: harbor
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-apps"
+  alias: harbor-k3s

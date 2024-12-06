@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cluster-bootstrap
+  namespace: gitops
+spec:
+  description: Project for bootstrapping cluster infrastructure
+  # Allow any repository
+  sourceRepos:
+    - '*'
+  # Allow deployment to any namespace
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  # Allow all cluster-scoped resources
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  # Allow all namespace-scoped resources
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'

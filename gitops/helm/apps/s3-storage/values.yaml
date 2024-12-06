@@ -1,0 +1,28 @@
+s3-storage:
+  minio-tenant:
+    tenant:
+      name: s3-storage
+      pools:
+        - servers: 1
+          name: pool-0
+          volumesPerServer: 1
+          size: 10Gi
+      buckets:
+        - name: backup
+          objectLock: false
+          region: us-east-1
+    ingress:
+      api:
+        enabled: true
+        tls: 
+          - secretName: minio-api-tls
+            hosts:
+              - s3.k3s0.ujstor.com
+        host: s3.k3s0.ujstor.com
+      console:
+        enabled: true
+        tls: 
+          - secretName: minio-console-tls
+            hosts:
+              - s3.console.k3s0.ujstor.com
+        host: s3.console.k3s0.ujstor.com

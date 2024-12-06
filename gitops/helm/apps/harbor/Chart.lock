@@ -1,0 +1,6 @@
+dependencies:
+- name: harbor
+  repository: https://ujstor.github.io/helm-charts-apps
+  version: 1.0.0
+digest: sha256:8c8e1e4949af8867c14a2d4f4ffccf66405ef2333889ba1bc66ff627a698fabb
+generated: "2024-12-01T18:16:22.765580089+01:00"

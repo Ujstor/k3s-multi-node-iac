@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-plausible-analytics
+  namespace: gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "13"
+    argocd.argoproj.io/hook-dependency: system-rook-ceph-cluster
+spec:
+  destination:
+    namespace: plausible-analytics
+    server: https://kubernetes.default.svc
+  project: cluster-bootstrap
+  source:
+    path: helm/apps/plausible-analytics
+    repoURL: https://github.com/Ujstor/k3s-multi-node-iac.git
+    targetRevision: master
+    helm:
+      version: v3
+      releaseName: plausible-analytics
+  ignoreDifferences:
+  - group: ""
+    kind: Secret
+    name: plausible-analytics
+    jsonPointers:
+    - /data
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

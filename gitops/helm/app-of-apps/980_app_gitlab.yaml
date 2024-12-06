@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-gitlab
+  namespace: gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "17"
+    argocd.argoproj.io/hook-dependency: system-rook-ceph-cluster
+spec:
+  destination:
+    namespace: gitlab
+    server: https://kubernetes.default.svc
+  project: cluster-bootstrap
+  source:
+    path: helm/apps/gitlab
+    repoURL: https://github.com/Ujstor/k3s-multi-node-iac.git
+    targetRevision: master
+    helm:
+      version: v3
+      releaseName: gitlab
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,6 @@
+dependencies:
+- name: uptime-kuma
+  repository: https://ujstor.github.io/helm-charts-apps
+  version: 1.0.0
+digest: sha256:88fcf440de00f2a8f868e8ca7b9fe50a112cfcf39f39f04a19c9ca99f2e57bae
+generated: "2024-11-30T18:29:00.804244863+01:00"

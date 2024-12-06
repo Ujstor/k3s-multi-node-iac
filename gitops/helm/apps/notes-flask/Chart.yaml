@@ -1,0 +1,11 @@
+apiVersion: v2
+name: notes-flask
+description: Ujstor's notes app with flask Helm chart for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+dependencies:
+- name: notes-flask
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-github-apps"

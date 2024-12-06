@@ -1,0 +1,12 @@
+apiVersion: v2
+name: gitlab
+description: Gitlab Helm chart configured by Ujstor
+type: application
+version: 8.6.1
+appVersion: "17.6.1"
+
+dependencies:
+- name: gitlab
+  version: 8.6.1
+  repository: "https://ujstor.github.io/helm-charts-apps"
+  alias: gitlab-k3s

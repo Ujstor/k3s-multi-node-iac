@@ -1,0 +1,6 @@
+dependencies:
+- name: minio-operator
+  repository: https://ujstor.github.io/helm-charts-system
+  version: 1.0.0
+digest: sha256:e14834455b8f21d6a561ca7621763ef57ef4d4316e9d4f8388049a9901a111b9
+generated: "2024-12-01T13:28:59.427037304+01:00"

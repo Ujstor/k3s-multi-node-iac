@@ -1,0 +1,13 @@
+uptime:
+  uptime-kuma:
+    ingress:
+      enabled: true
+      hosts:
+        - host: uptime.k3s0.ujstor.com
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: uptime-kuma-tls
+          hosts:
+            - uptime.k3s0.ujstor.com

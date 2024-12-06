@@ -1,0 +1,6 @@
+dependencies:
+- name: external-secrets
+  repository: https://ujstor.github.io/helm-charts-system
+  version: 1.0.0
+digest: sha256:aa3a5e1e2111e1064e7a8d26da70cc0e34796bbb4386a1dad2c0408324673a05
+generated: "2024-11-16T02:30:46.619516667+01:00"

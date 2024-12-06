@@ -1,0 +1,3 @@
+cilium-k3s:
+  cilium:
+    k8sServiceHost: api.k3s0.ujstor.com

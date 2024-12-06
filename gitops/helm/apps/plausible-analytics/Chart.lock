@@ -1,0 +1,6 @@
+dependencies:
+- name: plausible-analytics
+  repository: https://ujstor.github.io/helm-charts-apps
+  version: 1.0.0
+digest: sha256:a2b07621ad98dd3452c8d823df4b6f578b0eef31d719c0c697871951e885b139
+generated: "2024-11-30T22:51:33.280552239+01:00"

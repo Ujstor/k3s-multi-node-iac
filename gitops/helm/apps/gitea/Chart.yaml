@@ -1,0 +1,12 @@
+apiVersion: v2
+name: gitea
+description: Gitea Helm chart configured by Ujstor
+type: application
+version: 1.0.0
+appVersion: "1.22.3"
+
+dependencies:
+- name: gitea
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-apps"
+  alias: gitea-k3s

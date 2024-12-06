@@ -1,0 +1,11 @@
+apiVersion: v2
+name: minio-operator
+description: Minio Operator Helm chart configurated by Ujstor
+type: application
+version: 1.0.0
+appVersion: "v6.0.4"
+
+dependencies:
+- name: minio-operator
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-system"

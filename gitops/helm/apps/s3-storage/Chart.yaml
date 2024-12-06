@@ -1,0 +1,12 @@
+apiVersion: v2
+name: s3-storage
+description: Minio Tenant Helm chart configurated by Ujstor
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+dependencies:
+- name: minio-tenant
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-system"
+  alias: s3-storage

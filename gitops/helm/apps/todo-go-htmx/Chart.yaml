@@ -1,0 +1,11 @@
+apiVersion: v2
+name: todo-go-htmx
+description: Ujstor's todo app with psql Helm chart for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.1.1"
+
+dependencies:
+- name: todo-go-htmx
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-github-apps"

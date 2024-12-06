@@ -1,0 +1,6 @@
+dependencies:
+- name: notes-flask
+  repository: https://ujstor.github.io/helm-charts-github-apps
+  version: 1.0.0
+digest: sha256:e9789417cedfe67dfbf34b2ba8bed6b913965bc62d1fba8224bdd3de087c601d
+generated: "2024-11-23T19:50:04.217870107+01:00"

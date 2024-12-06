@@ -1,0 +1,11 @@
+apiVersion: v2
+name: postgres-operator
+description: Postgres Operator from Crunchy Data
+type: application
+version: 1.0.0
+appVersion: 5.7.0
+
+dependencies:
+- name: postgres-operator
+  version: 1.0.0
+  repository: "https://ujstor.github.io/helm-charts-system"

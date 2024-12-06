@@ -1,0 +1,8 @@
+---
+collections:
+- name: community.general
+  version: ">=9.5.0"
+- name: ansible.posix
+  version: ">=1.5.4"
+- name: https://github.com/k3s-io/k3s-ansible.git
+  type: git

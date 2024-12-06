@@ -1,0 +1,6 @@
+dependencies:
+- name: todo-go-htmx
+  repository: https://ujstor.github.io/helm-charts-github-apps
+  version: 1.0.0
+digest: sha256:e826e07af5035d542d25d57b19397a37259b5e71ff60e9ab32c6bd7a3dc6f833
+generated: "2024-11-23T11:20:19.072405818+01:00"

@@ -1,0 +1,4 @@
+gitlab-k3s:
+  gitlab:
+    domain: k3s0.ujstor.com
+    certIssuerEmail: astipan@mail.com
