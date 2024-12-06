@@ -21,7 +21,6 @@ spec:
       version: v3
       releaseName: s3-storage
   ignoreDifferences:
-  ignoreDifferences:
   - group: cilium.io
     kind: CiliumIdentity
     jsonPointers:

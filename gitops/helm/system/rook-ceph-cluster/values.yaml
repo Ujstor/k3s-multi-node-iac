@@ -34,13 +34,13 @@ cluster:
         limits:
           memory: "2Gi"
         requests:
-          cpu: "750m"
+          cpu: "500m"
           memory: "1Gi"
       osd:
         limits:
-          memory: "4Gi"
+          memory: "2.5Gi"
         requests:
-          cpu: "750m"
+          cpu: "500m"
           memory: "2Gi"
     dashboard:
       enabled: true
@@ -72,7 +72,7 @@ cluster:
         metadataServer:
           resources:
             limits:
-              memory: "4Gi"
+              memory: "2.5Gi"
             requests:
               cpu: "750m"
               memory: "2Gi"

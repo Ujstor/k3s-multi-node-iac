@@ -4,17 +4,27 @@
   gather_facts: true
   become: true
   tasks:
-    - name: Remove k3s servet
+    - name: Check if k3s uninstall script exists
+      ansible.builtin.stat:
+        path: /usr/local/bin/k3s-uninstall.sh
+      register: k3s_uninstall_script
+
+    - name: Remove k3s server
       ansible.builtin.command: /usr/local/bin/k3s-uninstall.sh
+      when: k3s_uninstall_script.stat.exists
       changed_when: true
-      ignore_errors: true
 
 - name: Remove k3s from agent
   hosts: agent
   gather_facts: true
   become: true
   tasks:
+    - name: Check if k3s agent uninstall script exists
+      ansible.builtin.stat:
+        path: /usr/local/bin/k3s-agent-uninstall.sh
+      register: k3s_agent_uninstall_script
+
     - name: Remove k3s agent
       ansible.builtin.command: /usr/local/bin/k3s-agent-uninstall.sh
+      when: k3s_agent_uninstall_script.stat.exists
       changed_when: true
-      ignore_errors: true
