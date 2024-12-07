@@ -51,7 +51,7 @@ cluster:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
                 - matchExpressions:
-                  - key: role
+                  - key: rook-ceph-role
                     operator: In
                     values:
                     - storage-node
@@ -64,11 +64,25 @@ cluster:
         storageClass:
           enabled: true
           name: ceph-block
+          isDefault: true
+          allowVolumeExpansion: true
+          reclaimPolicy: Delete
+          parameters:
+            csi.storage.k8s.io/fstype: ext4
+            encrypted: "false"
+            imageFormat: "2"
+            imageFeatures: layering
+            csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+            csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+            csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+            csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+            csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+            csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
           allowedTopologies: 
-           - matchLabelExpressions:
-               - key: rook-ceph-role
-                 values:
-                   - storage-node
+            - matchLabelExpressions:
+                - key: rook-ceph-role
+                  values:
+                    - storage-node
     cephFileSystems:
       - name: ceph-filesystem
         spec:
@@ -91,3 +105,12 @@ cluster:
           enabled: true
           isDefault: false
           name: ceph-filesystem
+          allowVolumeExpansion: true
+          reclaimPolicy: Delete
+          parameters:
+            csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+            csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+            csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+            csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+            csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+            csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph

@@ -1,6 +1,6 @@
-- name: Prepare disks for Rook Ceph
+- name: Setup K3S agent
   hosts: agent
-  become: true
   gather_facts: true
+  become: true
   roles:
     - role: rook-ceph-block-prepare
