@@ -12,7 +12,7 @@ module "k3s0_server" {
 
   server_config = {
     c1 = {
-      location     = "nbg1"
+      location     = "fsn1"
       server_type  = "cx22"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-1.subnet_id
@@ -26,7 +26,7 @@ module "k3s0_server" {
       subnet_ip    = "10.0.1.2"
     }
     c3 = {
-      location     = "nbg1"
+      location     = "hel1"
       server_type  = "cx22"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-1.subnet_id
@@ -40,31 +40,32 @@ module "k3s0_server" {
       subnet_ip    = "10.0.2.1"
     }
     n2 = {
-      location     = "nbg1"
+      location     = "fsn1"
       server_type  = "cx42"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.2"
     }
     n3 = {
-      location     = "nbg1"
+      location     = "hel1"
       server_type  = "cx42"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.3"
     }
   }
-  # firewall_ids = [
-  #   module.firewall.firewall_ids.ssh.id,
-  #   module.firewall.firewall_ids.https.id,
-  #   module.firewall.firewall_ids.kubeapi.id,
-  #   module.firewall.firewall_ids.k3s.id
-  # ]
+  firewall_ids = [
+    module.firewall.firewall_ids.ssh.id,
+    module.firewall.firewall_ids.https.id,
+    module.firewall.firewall_ids.kubeapi.id,
+    module.firewall.firewall_ids.k3s.id,
+    module.firewall.firewall_ids.argocd.id
+  ]
   use_network = true
   depends_on = [
     module.ssh_key_k3s0,
-    module.network_config
-    # module.firewall
+    module.network_config,
+    module.firewall
   ]
 }
 
@@ -73,17 +74,17 @@ module "volumes" {
 
   volume_config = {
     volume-1 = {
-      size      = 250
+      size      = 100
       location  = module.k3s0_server.server_info.n1.location
       server_id = module.k3s0_server.server_info.n1.id
     }
     volume-2 = {
-      size      = 250
+      size      = 100
       location  = module.k3s0_server.server_info.n2.location
       server_id = module.k3s0_server.server_info.n2.id
     }
     volume-3 = {
-      size      = 250
+      size      = 100
       location  = module.k3s0_server.server_info.n3.location
       server_id = module.k3s0_server.server_info.n3.id
     }
