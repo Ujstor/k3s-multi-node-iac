@@ -34,37 +34,37 @@ module "k3s0_server" {
     }
     n1 = {
       location     = "nbg1"
-      server_type  = "cx32"
+      server_type  = "cx42"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.1"
     }
     n2 = {
       location     = "nbg1"
-      server_type  = "cx32"
+      server_type  = "cx42"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.2"
     }
     n3 = {
       location     = "nbg1"
-      server_type  = "cx32"
+      server_type  = "cx42"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.3"
     }
   }
-  firewall_ids = [
-    module.firewall.firewall_ids.ssh.id,
-    module.firewall.firewall_ids.https.id,
-    module.firewall.firewall_ids.kubeapi.id,
-    module.firewall.firewall_ids.k3s.id
-  ]
+  # firewall_ids = [
+  #   module.firewall.firewall_ids.ssh.id,
+  #   module.firewall.firewall_ids.https.id,
+  #   module.firewall.firewall_ids.kubeapi.id,
+  #   module.firewall.firewall_ids.k3s.id
+  # ]
   use_network = true
   depends_on = [
     module.ssh_key_k3s0,
-    module.network_config,
-    module.firewall
+    module.network_config
+    # module.firewall
   ]
 }
 

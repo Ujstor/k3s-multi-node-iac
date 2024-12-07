@@ -1,0 +1,6 @@
+dependencies:
+- name: metallb-operator
+  repository: https://ujstor.github.io/helm-charts-system
+  version: 1.0.0
+digest: sha256:64960a0b08acf9070d00e02187a87dfa9583e35ea0d1db3a1eb7c5a590874a3f
+generated: "2024-12-07T21:35:18.141184161+01:00"

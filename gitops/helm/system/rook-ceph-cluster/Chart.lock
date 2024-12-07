@@ -2,5 +2,5 @@ dependencies:
 - name: rook-ceph-cluster
   repository: https://ujstor.github.io/helm-charts-system
   version: 1.0.0
-digest: sha256:2ec66a79dcec17bd950149d517f1c62880305f74f6366011902bcbefc3788ddf
-generated: "2024-12-07T01:42:51.848725817+01:00"
+digest: sha256:2ee5d38651bb6e9270b744fae7d6ff1a57d2241c4944c9cd0daf485ce1ffd67f
+generated: "2024-12-07T21:35:28.475044694+01:00"

@@ -1,0 +1,6 @@
+- name: Prepare disks for Rook Ceph
+  hosts: agent
+  become: true
+  gather_facts: true
+  roles:
+    - role: rook-ceph-block-prepare

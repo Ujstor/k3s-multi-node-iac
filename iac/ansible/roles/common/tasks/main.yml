@@ -1,8 +1,8 @@
 ---
-# - name: Update package lists
-#   ansible.builtin.apt:
-#     update_cache: true
-#
+- name: Update package lists
+  ansible.builtin.apt:
+    update_cache: true
+
 # - name: Upgrade all packages
 #   ansible.builtin.apt:
 #     upgrade: true

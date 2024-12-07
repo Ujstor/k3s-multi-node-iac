@@ -1,0 +1,65 @@
+---
+- name: Get list of mounted devices under /mnt
+  command: findmnt -l -n -o SOURCE,TARGET | grep /mnt
+  register: mounted_devices
+  changed_when: false
+  failed_when: false
+
+- name: Unmount all volumes under /mnt
+  mount:
+    path: "{{ item.split()[1] }}"
+    state: unmounted
+  with_items: "{{ mounted_devices.stdout_lines }}"
+  when: mounted_devices.stdout_lines | length > 0
+
+- name: Get list of block devices
+  command: lsblk -pndo NAME
+  register: block_devices
+  changed_when: false
+
+- name: Wipe filesystem signatures from devices
+  block:
+    - name: Wipe filesystem signatures
+      command: wipefs -af {{ item }}
+      with_items: "{{ block_devices.stdout_lines }}"
+      when: 
+        - "'loop' not in item"
+        - "'ram' not in item"
+        - "'boot' not in item"
+        - "'root' not in item"
+
+    - name: Zero first 100MB of each device
+      command: dd if=/dev/zero of={{ item }} bs=1M count=100
+      with_items: "{{ block_devices.stdout_lines }}"
+      when:
+        - "'loop' not in item"
+        - "'ram' not in item"
+        - "'boot' not in item"
+        - "'root' not in item"
+
+- name: Clear partition tables
+  command: sgdisk --zap-all {{ item }}
+  with_items: "{{ block_devices.stdout_lines }}"
+  when:
+    - "'loop' not in item"
+    - "'ram' not in item"
+    - "'boot' not in item"
+    - "'root' not in item"
+
+- name: Wait for all device changes to settle
+  command: udevadm settle
+  changed_when: false
+
+- name: Clear device mapper entries
+  command: dmsetup remove_all --force
+  failed_when: false
+  changed_when: true
+
+- name: Final wipe of devices
+  command: wipefs -af {{ item }}
+  with_items: "{{ block_devices.stdout_lines }}"
+  when:
+    - "'loop' not in item"
+    - "'ram' not in item"
+    - "'boot' not in item"
+    - "'root' not in item"

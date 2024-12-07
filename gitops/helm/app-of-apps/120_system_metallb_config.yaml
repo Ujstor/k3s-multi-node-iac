@@ -1,25 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: system-rook-ceph-cluster
+  name: system-metallb-config
   namespace: gitops
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "7"
-    argocd.argoproj.io/hook-dependency: system-cert-manager
+    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/hook-dependency: system-metallb-operator
 spec:
   destination:
-    namespace: rook-ceph
+    namespace: metallb
     server: https://kubernetes.default.svc
   project: cluster-bootstrap
   source:
-    path: gitops/helm/system/rook-ceph-cluster
+    path: gitops/helm/system/metallb-config
     repoURL: https://github.com/Ujstor/k3s-multi-node-iac.git
     targetRevision: master
     helm:
       version: v3
-      releaseName: rook-ceph-cluster
+      releaseName: metallb-config
   syncPolicy:
     automated:
       selfHeal: true

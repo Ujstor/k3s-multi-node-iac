@@ -20,7 +20,7 @@ docker run --rm -it \
     -v $(pwd)/iac/terraform/.ssh/k3s0_hetzner_key.pub:/secrets/ssh_key.pub \
     ansible-k3s-cluster
 
-ansible-playbook playbook_k3s_deploy.yml
+ansible-playbook k3s_deploy.yml
 
 cat kubeconfig
 ```
