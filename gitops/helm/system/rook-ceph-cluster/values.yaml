@@ -1,82 +1,83 @@
 cluster:
-  ingress:
-    dashboard:
-       annotations:
-         external-dns.alpha.kubernetes.io/hostname: rook-ceph.dashboard.k3s0.ujstor.com
-         nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
-         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-         nginx.ingress.kubernetes.io/server-snippet: |
-           proxy_ssl_verify off;
-       host:
-         name: rook-ceph.dashboard.ujstor.com
-         path: "/ceph-dashboard(/|$)(.*)"
-       tls:
-       - hosts:
-           - rook-ceph.dashboard.k3s0.ujstor.com
-         secretName: rook-ceph-ingress-tls
-       ingressClassName: nginx
+  rook-ceph-cluster:
+    ingress:
+      dashboard:
+         annotations:
+           external-dns.alpha.kubernetes.io/hostname: rook-ceph.dashboard.k3s0.ujstor.com
+           nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
+           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+           nginx.ingress.kubernetes.io/server-snippet: |
+             proxy_ssl_verify off;
+         host:
+           name: rook-ceph.dashboard.ujstor.com
+           path: "/ceph-dashboard(/|$)(.*)"
+         tls:
+         - hosts:
+             - rook-ceph.dashboard.k3s0.ujstor.com
+           secretName: rook-ceph-ingress-tls
+         ingressClassName: nginx
 
-  cephClusterSpec:
-    mon:
-      count: 3
-      allowMultiplePerNode: false
-    mgr:
-      count: 3
-      allowMultiplePerNode: false
-    resources:
-      mgr:
-        limits:
-          memory: "1Gi"
-        requests:
-          cpu: "500m"
-          memory: "512Mi"
+    cephClusterSpec:
       mon:
-        limits:
-          memory: "2Gi"
-        requests:
-          cpu: "500m"
-          memory: "1Gi"
-      osd:
-        limits:
-          memory: "2.5Gi"
-        requests:
-          cpu: "500m"
-          memory: "2Gi"
-    dashboard:
-      enabled: true
-      ssl: true
-      placement:
-        all:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                  - key: role
-                    operator: In
-                    values:
-                    - storage-node
+        count: 3
+        allowMultiplePerNode: false
+      mgr:
+        count: 3
+        allowMultiplePerNode: false
+      resources:
+        mgr:
+          limits:
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+        mon:
+          limits:
+            memory: "2Gi"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+        osd:
+          limits:
+            memory: "2.5Gi"
+          requests:
+            cpu: "500m"
+            memory: "2Gi"
+      dashboard:
+        enabled: true
+        ssl: true
+        placement:
+          all:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: role
+                      operator: In
+                      values:
+                      - storage-node
 
-  cephBlockPools:
-    - name: ceph-blockpool
-      storageClass:
-        enabled: true
-        name: ceph-block
-        allowedTopologies: 
-         - matchLabelExpressions:
-             - key: rook-ceph-role
-               values:
-                 - storage-node
-  cephFileSystems:
-    - name: ceph-filesystem
-      spec:
-        metadataServer:
-          resources:
-            limits:
-              memory: "2.5Gi"
-            requests:
-              cpu: "750m"
-              memory: "2Gi"
-      storageClass:
-        enabled: true
-        isDefault: false
-        name: ceph-filesystem
+    cephBlockPools:
+      - name: ceph-blockpool
+        storageClass:
+          enabled: true
+          name: ceph-block
+          allowedTopologies: 
+           - matchLabelExpressions:
+               - key: rook-ceph-role
+                 values:
+                   - storage-node
+    cephFileSystems:
+      - name: ceph-filesystem
+        spec:
+          metadataServer:
+            resources:
+              limits:
+                memory: "2.5Gi"
+              requests:
+                cpu: "750m"
+                memory: "2Gi"
+        storageClass:
+          enabled: true
+          isDefault: false
+          name: ceph-filesystem
