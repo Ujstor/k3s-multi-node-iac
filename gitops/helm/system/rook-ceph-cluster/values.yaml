@@ -9,7 +9,7 @@ cluster:
            nginx.ingress.kubernetes.io/server-snippet: |
              proxy_ssl_verify off;
          host:
-           name: rook-ceph.dashboard.ujstor.com
+           name: rook-ceph.dashboard.k3s0.ujstor.com
            path: "/ceph-dashboard(/|$)(.*)"
          tls:
          - hosts:
