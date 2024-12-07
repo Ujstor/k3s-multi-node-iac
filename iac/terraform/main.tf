@@ -68,6 +68,28 @@ module "k3s0_server" {
   ]
 }
 
+module "volumes" {
+  source = "github.com/Ujstor/terraform-hetzner-modules//modules/volumes?ref=v0.0.6"
+
+  volume_config = {
+    volume-1 = {
+      size      = 250
+      location  = module.k3s0_server.server_info.n1.location
+      server_id = module.k3s0_server.server_info.n1.id
+    }
+    volume-2 = {
+      size      = 250
+      location  = module.k3s0_server.server_info.n2.location
+      server_id = module.k3s0_server.server_info.n2.id
+    }
+    volume-3 = {
+      size      = 250
+      location  = module.k3s0_server.server_info.n3.location
+      server_id = module.k3s0_server.server_info.n3.id
+    }
+  }
+}
+
 module "network_config" {
   source = "github.com/Ujstor/terraform-hetzner-modules//modules/network/vpc_subnet?ref=v0.0.6"
 

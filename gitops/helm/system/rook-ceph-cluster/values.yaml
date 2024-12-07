@@ -16,7 +16,6 @@ cluster:
              - rook-ceph.dashboard.k3s0.ujstor.com
            secretName: rook-ceph-ingress-tls
          ingressClassName: nginx
-
     cephClusterSpec:
       mon:
         count: 3
@@ -46,19 +45,22 @@ cluster:
       dashboard:
         enabled: true
         ssl: true
-        placement:
-          all:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                    - key: role
-                      operator: In
-                      values:
-                      - storage-node
-
+      placement:
+        all:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: role
+                    operator: In
+                    values:
+                    - storage-node
     cephBlockPools:
       - name: ceph-blockpool
+        spec:
+          failureDomain: host
+          replicated:
+            size: 3
         storageClass:
           enabled: true
           name: ceph-block
@@ -70,7 +72,15 @@ cluster:
     cephFileSystems:
       - name: ceph-filesystem
         spec:
+          metadataPool:
+            replicated:
+              size: 3
+          dataPools:
+            - name: replicated
+              replicated:
+                size: 3
           metadataServer:
+            activeCount: 1
             resources:
               limits:
                 memory: "2Gi"
