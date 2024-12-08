@@ -1,5 +1,5 @@
 apiVersion: v2
-name: cilium single node
+name: cilium
 description: Cilium Helm chart configured by Ujstor
 type: application
 version: 1.0.0

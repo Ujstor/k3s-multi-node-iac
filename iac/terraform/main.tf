@@ -54,18 +54,18 @@ module "k3s0_server" {
       subnet_ip    = "10.0.2.3"
     }
   }
-  firewall_ids = [
-    module.firewall.firewall_ids.ssh.id,
-    module.firewall.firewall_ids.https.id,
-    module.firewall.firewall_ids.kubeapi.id,
-    module.firewall.firewall_ids.k3s.id,
-    module.firewall.firewall_ids.argocd.id
-  ]
+  # firewall_ids = [
+  #   module.firewall.firewall_ids.cilium.id,
+  #   module.firewall.firewall_ids.ssh-https.id,
+  #   module.firewall.firewall_ids.kubeapi.id,
+  #   module.firewall.firewall_ids.k3s.id,
+  #   module.firewall.firewall_ids.argocd.id
+  # ]
   use_network = true
   depends_on = [
+    # module.firewall,
     module.ssh_key_k3s0,
-    module.network_config,
-    module.firewall
+    module.network_config
   ]
 }
 

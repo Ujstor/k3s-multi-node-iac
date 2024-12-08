@@ -55,6 +55,8 @@ cluster:
                     operator: In
                     values:
                     - storage-node
+      storage:
+        useAllDevices: true
     cephBlockPools:
       - name: ceph-blockpool
         spec:
