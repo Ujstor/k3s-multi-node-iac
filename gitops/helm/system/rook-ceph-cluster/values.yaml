@@ -1,21 +1,21 @@
 cluster:
   rook-ceph-cluster:
-    ingress:
-      dashboard:
-         annotations:
-           external-dns.alpha.kubernetes.io/hostname: rook-ceph.dashboard.k3s0.ujstor.com
-           nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
-           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-           nginx.ingress.kubernetes.io/server-snippet: |
-             proxy_ssl_verify off;
-         host:
-           name: rook-ceph.dashboard.k3s0.ujstor.com
-           path: "/ceph-dashboard(/|$)(.*)"
-         tls:
-         - hosts:
-             - rook-ceph.dashboard.k3s0.ujstor.com
-           secretName: rook-ceph-ingress-tls
-         ingressClassName: nginx
+    # ingress:
+    #   dashboard:
+    #      annotations:
+    #        external-dns.alpha.kubernetes.io/hostname: rook-ceph.dashboard.k3s0.ujstor.com
+    #        nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
+    #        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    #        nginx.ingress.kubernetes.io/server-snippet: |
+    #          proxy_ssl_verify off;
+    #      host:
+    #        name: rook-ceph.dashboard.k3s0.ujstor.com
+    #        path: "/ceph-dashboard(/|$)(.*)"
+    #      tls:
+    #      - hosts:
+    #          - rook-ceph.dashboard.k3s0.ujstor.com
+    #        secretName: rook-ceph-ingress-tls
+    #      ingressClassName: nginx
     cephClusterSpec:
       mon:
         count: 3
