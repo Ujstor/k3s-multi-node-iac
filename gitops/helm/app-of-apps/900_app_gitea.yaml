@@ -10,7 +10,7 @@ metadata:
     argocd.argoproj.io/hook-dependency: system-rook-ceph-cluster
 spec:
   destination:
-    namespace: gitops
+    namespace: gitea
     server: https://kubernetes.default.svc
   project: cluster-bootstrap
   source:

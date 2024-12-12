@@ -2,27 +2,21 @@ all:
   hosts:
     c1:
       ansible_host: c1.k8s0.ujstor.com
-      ip: 49.13.159.158
       etcd_member_name: c1
     c2:
       ansible_host: c2.k8s0.ujstor.com
-      ip: 116.203.79.140
       etcd_member_name: c2
     c3:
       ansible_host: c3.k8s0.ujstor.com
-      ip: 49.13.196.15
       etcd_member_name: c3
     n1:
       ansible_host: n1.k8s0.ujstor.com
-      ip: 49.13.159.140
       etcd_member_name: n1
     n2:
       ansible_host: n2.k8s0.ujstor.com
-      ip: 188.245.179.200
       etcd_member_name: n2
     n3:
       ansible_host: n3.k8s0.ujstor.com
-      ip: 95.217.11.205
       etcd_member_name: n3
 
   children:
@@ -54,16 +48,16 @@ all:
       vars:
         kube_version: v1.31.1
         # kube_vip_enabled: true
-        # kube_proxy_strict_arp: true
         # kube_vip_controlplane_enabled: true
         # kube_vip_address: 116.203.79.140
-        # apiserver_loadbalancer_domain_name: api.k8s0.ujstor.com
-        # loadbalancer_apiserver:
-        #   address: "{{ kube_vip_address }}"
-        #   port: 6443
         # kube_vip_services_enabled: false
         # kube_vip_arp_enabled: true
         # kube_vip_lb_enable: true
+        kube_proxy_strict_arp: true
+        apiserver_loadbalancer_domain_name: api.k8s0.ujstor.com
+        # loadbalancer_apiserver:
+        #   address: "{{ kube_vip_address }}"
+        #   port: 6443
         kube_network_plugin: cni
         kube_pods_subnet: 10.255.0.0/16
         kube_service_addresses: 10.254.0.0/16

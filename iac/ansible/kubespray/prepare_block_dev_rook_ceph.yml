@@ -1,5 +1,5 @@
 - name: Setup K3S agent
-  hosts: agent
+  hosts: virtual_nodes
   gather_facts: true
   become: true
   roles:
