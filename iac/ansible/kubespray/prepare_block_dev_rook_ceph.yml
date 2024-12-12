@@ -1,0 +1,6 @@
+- name: Setup K3S agent
+  hosts: agent
+  gather_facts: true
+  become: true
+  roles:
+    - role: rook-ceph-block-prepare

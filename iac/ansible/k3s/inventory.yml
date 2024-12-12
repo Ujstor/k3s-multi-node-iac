@@ -3,16 +3,16 @@ k3s_cluster:
   children:
     server:
       hosts:
-        api.k3s3c1.ujstor.com:
-        api.k3s3c2.ujstor.com:
-        api.k3s3c3.ujstor.com:
+        api.k8s0c1.ujstor.com:
+        api.k8s0c2.ujstor.com:
+        api.k8s0c3.ujstor.com:
     agent:
       hosts:
-        api.k3s3n1.ujstor.com:
-        api.k3s3n2.ujstor.com:
-        api.k3s3n3.ujstor.com:
+        api.k8s0n1.ujstor.com:
+        api.k8s0n2.ujstor.com:
+        api.k8s0n3.ujstor.com:
   vars:
     k3s_version: v1.31.1+k3s1
-    api_endpoint: "api.k3s3.ujstor.com"
+    api_endpoint: "api.k8s0.ujstor.com"
     extra_server_args: "--cluster-cidr=10.255.0.0/16 --service-cidr=10.254.0.0/16 --disable servicelb --disable local-storage --disable traefik --flannel-backend=none --egress-selector-mode=disabled --disable-cloud-controller --disable-helm-controller --disable-network-policy --disable-kube-proxy --tls-san {{ api_endpoint }}"
     extra_agent_args: "--node-label  rook-ceph-role=storage-node"

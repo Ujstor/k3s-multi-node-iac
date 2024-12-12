@@ -14,7 +14,7 @@ spec:
   project: cluster-bootstrap
   source:
     path: gitops/helm/apps/notes-flask
-    repoURL: https://github.com/Ujstor/k3s-multi-node-iac.git
+    repoURL: https://github.com/Ujstor/k8s-k3s-multi-node-iac.git
     targetRevision: master
     helm:
       version: v3

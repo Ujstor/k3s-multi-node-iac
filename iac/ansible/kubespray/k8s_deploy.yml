@@ -1,0 +1,22 @@
+---
+- name: Include a play after another play
+  ansible.builtin.import_playbook: kubernetes_sigs.kubespray.cluster
+
+- name: Get kubeconfig
+  hosts: c1
+  become: true
+  vars:
+    kubeconfig_path: /etc/kubernetes/kubelet.conf
+    local_kubeconfig_path: ./kubeconfig
+  tasks:
+    - name: Fetch kubeconfig file from remote server
+      ansible.builtin.fetch:
+        src: "{{ kubeconfig_path }}"
+        dest: "{{ local_kubeconfig_path }}"
+        flat: true
+    - name: Replace server IP in kubeconfig
+      ansible.builtin.replace:
+        path: "{{ local_kubeconfig_path }}"
+        regexp: 'server: https://[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:6443'
+        replace: "server: https://{{ kube_vip_address }}:6443"
+      delegate_to: localhost

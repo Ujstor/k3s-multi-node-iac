@@ -1,18 +1,18 @@
-module "ssh_key_k3s3" {
+module "ssh_key_k8s0" {
   source = "github.com/Ujstor/terraform-hetzner-modules//modules/ssh_key?ref=v0.0.6"
 
-  ssh_key_name = "k3s3_hetzner_key"
+  ssh_key_name = "kube_hetzner_key"
   ssh_key_path = ".ssh" #create dir before appling tf config if you use custom paths for ssh keys
 }
 
-module "k3s3_server" {
+module "k8s0_server" {
   source = "github.com/Ujstor/terraform-hetzner-modules//modules/server?ref=v0.0.6"
 
-  hcloud_ssh_key_id = [module.ssh_key_k3s3.hcloud_ssh_key_id]
+  hcloud_ssh_key_id = [module.ssh_key_k8s0.hcloud_ssh_key_id]
 
   server_config = {
     c1 = {
-      location     = "fsn1"
+      location     = "nbg1"
       server_type  = "cx22"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-1.subnet_id
@@ -26,7 +26,7 @@ module "k3s3_server" {
       subnet_ip    = "10.0.1.2"
     }
     c3 = {
-      location     = "hel1"
+      location     = "nbg1"
       server_type  = "cx22"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-1.subnet_id
@@ -40,8 +40,8 @@ module "k3s3_server" {
       subnet_ip    = "10.0.2.1"
     }
     n2 = {
-      location     = "fsn1"
-      server_type  = "cx42"
+      location     = "nbg1"
+      server_type  = "cx32"
       ipv6_enabled = false
       subnet_id    = module.network_config.subnet_id.subnet-2.subnet_id
       subnet_ip    = "10.0.2.2"
@@ -64,7 +64,7 @@ module "k3s3_server" {
   use_network = true
   depends_on = [
     # module.firewall,
-    module.ssh_key_k3s3,
+    module.ssh_key_k8s0,
     module.network_config
   ]
 }
@@ -75,18 +75,18 @@ module "volumes" {
   volume_config = {
     volume-1 = {
       size      = 100
-      location  = module.k3s3_server.server_info.n1.location
-      server_id = module.k3s3_server.server_info.n1.id
+      location  = module.k8s0_server.server_info.n1.location
+      server_id = module.k8s0_server.server_info.n1.id
     }
     volume-2 = {
       size      = 100
-      location  = module.k3s3_server.server_info.n2.location
-      server_id = module.k3s3_server.server_info.n2.id
+      location  = module.k8s0_server.server_info.n2.location
+      server_id = module.k8s0_server.server_info.n2.id
     }
     volume-3 = {
       size      = 100
-      location  = module.k3s3_server.server_info.n3.location
-      server_id = module.k3s3_server.server_info.n3.id
+      location  = module.k8s0_server.server_info.n3.location
+      server_id = module.k8s0_server.server_info.n3.id
     }
   }
 }

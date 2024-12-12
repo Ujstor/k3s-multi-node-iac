@@ -1,9 +1,9 @@
-# k8s multi node iac on Hetzner
+# k8s/k3s multi node iac on Hetzner
 
 ## Terraform
 
 ```bash
-cd iac/terrafrom
+cd iac/terrafrom/nodes-hetzner
 
 terraform init
 terraform apply
@@ -12,16 +12,30 @@ terraform apply
 ## Ansible
 
 ```bash
-docker build -t ansible-k3s-cluster ./iac/ansible/
+#K3s
+docker build -t ansible-k3s-cluster ./iac/ansible/k3s
 
 docker run --rm -it \
-    -v $(pwd)/iac/ansible/inventory.yml:/config/inventory.yml \
-    -v $(pwd)/iac/terraform/.ssh/k3s3_hetzner_key:/secrets/ssh_key \
-    -v $(pwd)/iac/terraform/.ssh/k3s3_hetzner_key.pub:/secrets/ssh_key.pub \
+    -v $(pwd)/iac/ansible/k3s_inventory.yml:/config/inventory.yml \
+    -v $(pwd)/iac/terraform/nodes-hetzner/.ssh/kube_hetzner_key:/secrets/ssh_key \
+    -v $(pwd)/iac/terraform/nodes-hetzner/.ssh/kube_hetzner_key.pub:/secrets/ssh_key.pub \
     ansible-k3s-cluster
 
 ansible-playbook k3s_deploy.yml
-ansible-playbook repare_block_dev_rook_ceph.yml
+ansible-playbook prepare_block_dev_rook_ceph.yml
+
+#K8s kubespray
+docker build -t ansible-k8s-cluster ./iac/ansible/kubespray
+
+docker run --rm -it \
+    -v $(pwd)/iac/ansible/k8s_kubespray_inventory.yml:/config/inventory.yml \
+    -v $(pwd)/iac/terraform/nodes-hetzner/.ssh/kube_hetzner_key:/secrets/ssh_key \
+    -v $(pwd)/iac/terraform/nodes-hetzner/.ssh/kube_hetzner_key.pub:/secrets/ssh_key.pub \
+    ansible-k8s-cluster
+
+ansible-playbook k8s_deploy.yml
+ansible-playbook prepare_block_dev_rook_ceph.yml
+
 
 cat kubeconfig
 ```

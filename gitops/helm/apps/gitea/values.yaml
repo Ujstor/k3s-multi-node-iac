@@ -3,14 +3,14 @@ gitea-k3s:
     ingress:
       enabled: true
       hosts:
-        - host: gitea.k3s3.ujstor.com
+        - host: gitea.k8s0.ujstor.com
           paths:
             - path: /
               pathType: Prefix
       tls:
         - secretName: gitea-tls
           hosts:
-            - gitea.k3s3.ujstor.com
+            - gitea.k8s0.ujstor.com
 
       primary:
         persistence:

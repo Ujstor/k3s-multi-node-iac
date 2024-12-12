@@ -1,6 +1,6 @@
 cilium-k3s:
   cilium:
-    k8sServiceHost: api.k3s3.ujstor.com
+    k8sServiceHost: api.k8s0.ujstor.com
 #     ipv4NativeRoutingCIDR: "10.0.0.0/16"
 #     devices: "enp7s0"  # internal network interface
 #     tunnelProtocol: "vxlan"  # Specify VXLAN explicitly

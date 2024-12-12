@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: gitops/helm/app-of-apps
-    repoURL: https://github.com/Ujstor/k3s-multi-node-iac
+    repoURL: https://github.com/Ujstor/k8s-k3s-multi-node-iac
     targetRevision: master
   syncPolicy:
     automated:

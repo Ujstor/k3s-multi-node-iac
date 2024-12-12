@@ -16,7 +16,6 @@
 - name: Install required packages
   ansible.builtin.package:
     name: 
-      - ufw
       - fail2ban
     state: present
 
