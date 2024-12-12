@@ -16,11 +16,12 @@ docker build -t ansible-k3s-cluster ./iac/ansible/
 
 docker run --rm -it \
     -v $(pwd)/iac/ansible/inventory.yml:/config/inventory.yml \
-    -v $(pwd)/iac/terraform/.ssh/k3s0_hetzner_key:/secrets/ssh_key \
-    -v $(pwd)/iac/terraform/.ssh/k3s0_hetzner_key.pub:/secrets/ssh_key.pub \
+    -v $(pwd)/iac/terraform/.ssh/k3s3_hetzner_key:/secrets/ssh_key \
+    -v $(pwd)/iac/terraform/.ssh/k3s3_hetzner_key.pub:/secrets/ssh_key.pub \
     ansible-k3s-cluster
 
 ansible-playbook k3s_deploy.yml
+ansible-playbook repare_block_dev_rook_ceph.yml
 
 cat kubeconfig
 ```

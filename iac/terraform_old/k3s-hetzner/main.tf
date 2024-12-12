@@ -7,8 +7,8 @@ module "kube-hetzner" {
 
   hcloud_token = var.hcloud_token
 
-  ssh_public_key  = file(".ssh/k3s0_hetzner_key.pub")
-  ssh_private_key = file(".ssh/k3s0_hetzner_key")
+  ssh_public_key  = file(".ssh/k3s3_hetzner_key.pub")
+  ssh_private_key = file(".ssh/k3s3_hetzner_key")
 
   control_plane_nodepools = [
     {
@@ -85,10 +85,10 @@ module "kube-hetzner" {
   system_upgrade_use_drain = false
   install_k3s_version      = "v1.30.1+k3s1"
 
-  cluster_name = "k3s0"
+  cluster_name = "k3s3"
 
-  additional_tls_sans       = ["api.k3s0.ujstor.com"]
-  kubeconfig_server_address = "api.k3s0.ujstor.com"
+  additional_tls_sans       = ["api.k3s3.ujstor.com"]
+  kubeconfig_server_address = "api.k3s3.ujstor.com"
 
   # load_balancer_type         = "lb11"
   # load_balancer_location     = "fsn1"

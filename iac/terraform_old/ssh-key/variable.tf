@@ -1,7 +1,7 @@
 variable "ssh_key_name" {
   type        = string
   description = "Name of the SSH key created"
-  default     = "k3s0_hetzner_key"
+  default     = "k3s3_hetzner_key"
 }
 
 variable "ssh_key_path" {

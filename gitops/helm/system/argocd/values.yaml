@@ -1,7 +1,7 @@
 argocd-k3s:
   argo:
     global:
-      domain: argocd.k3s0.ujstor.com
+      domain: argocd.k3s3.ujstor.com
     server:
       ingress:
         enabled: true
@@ -12,7 +12,7 @@ argocd-k3s:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         extraTls:
           - hosts:
-            - argocd.k3s0.ujstor.com
+            - argocd.k3s3.ujstor.com
             secretName: argocd-ingress-tls
 
     redis-ha:
